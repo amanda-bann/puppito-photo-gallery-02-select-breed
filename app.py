@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-#import requests
+import requests
 
 #imports a dictionary of data from dog_breeds.py and "prettifies", or styles, the dog names when they appear in the HTML page
 from dog_breeds import prettify_dog_breed
@@ -16,6 +16,12 @@ def puppito_pic_gallery():
   errors = []
   if request.method == "POST":
      breed = request.form.get("breed")
+  if not breed:
+     errors.append("Woof! Please choose a puppito breed!")
+  if breed:
+     response = requests.get("https://dog.ceo/api/breed/" + check_breed(breed) + "/images/random/30")
+     data = response.json()
+     puppito_pics = data["message"]
   return render_template("dogs.html")
 
 
