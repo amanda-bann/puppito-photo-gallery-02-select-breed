@@ -1,7 +1,7 @@
 <html lang="en">
 
 <head>
-  <title>Dog Image Gallery</title>
+  <title>Pup Pic Gallery</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='dogs.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Rozha+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Red+Hat+Display:400,700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <img class="pup-logo"
       src="https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2019/09/Asset-1.png"
       alt="pup logo" />
-    <h1>Dog Image Gallery</h1>
+    <h1>Pup Pic Gallery</h1>
   </div>
   <div class="errors">
     {% for error in errors %}
@@ -161,8 +161,12 @@
     </form>
   </div>
   <div class="content">
-    <img class="dogimage" src="https://images.dog.ceo/breeds/corgi-cardigan/n02113186_2431.jpg"
-      alt="Corgi swimming near the shore">
+    <h2>{{breed}}</h2>
+    {% for image in images %}
+    <div class="dogcontainer">
+      <img class="dogimage" src={{image}} alt="{{breed}}"/>
+    </div>
+    {% endfor %}
   </div>
 </body>
 
