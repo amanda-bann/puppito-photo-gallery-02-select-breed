@@ -15,12 +15,16 @@ def check_breed(breed):
 def puppito_pic_gallery():
   errors = []
   breed = ""
+  number = ""
   if request.method == "POST":
      breed = request.form.get("breed")
+     number = request.form.get("number")
   if not breed:
-     errors.append("Woof! Please choose a puppito breed!")
-  if breed:
-     response = requests.get("https://dog.ceo/api/breed/" + check_breed(breed) + "/images/random/30")
+     errors.append("Woof! Please choose a puppito breed")
+  if not number:
+     errors.append("rrruff! Select a number of pup pics please")
+  if breed and number:
+     response = requests.get("https://dog.ceo/api/breed/" + check_breed(breed) + "/images/random/" + number)
      data = response.json()
      puppito_pics = data["message"]
      return render_template("dogs.html", images=puppito_pics, breed=prettify_dog_breed(breed), errors=[])
