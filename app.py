@@ -11,6 +11,13 @@ app = Flask(__name__)
 def check_breed(breed):
   return "/".join(breed.split("-"))
 
+@app.route("/random", methods=["POST"])
+def get_random_puppito_pic():
+   response = requests.get("https://dog.ceo/api/breeds/image/random")
+   data = response.json()
+   puppito_pics = [data["message"]]
+   return render_template("dogs.html", images=puppito_pics)
+
 @app.route("/", methods=["GET", "POST"])
 def puppito_pic_gallery():
   errors = []
